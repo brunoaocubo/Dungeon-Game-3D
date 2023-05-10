@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+
+        if (inputs.GetDodgeButton())
         {
             if (canDodge)
             {
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
         if (canAttack)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (inputs.GetAttackButton())
             {
                 canAttack = false;
                 Collider[] col = Physics.OverlapSphere(new Vector3(0, 2, 0), 3f);
