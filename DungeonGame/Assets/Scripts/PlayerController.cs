@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Inputs inputs;
+    [SerializeField] private GameObject particleDestructable;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float dodgeForce;
     [SerializeField] private float rotateSpeed;
     
+    [SerializeField] private float swordDamage;
+
+
     private Rigidbody rb;
     private bool isWalk;
 
@@ -47,8 +52,7 @@ public class PlayerController : MonoBehaviour
             if (inputs.GetAttackButton())
             {
                 canAttack = false;
-                Collider[] col = Physics.OverlapSphere(new Vector3(0, 2, 0), 3f);
-                
+                Attack();              
             }
         }
 
@@ -93,6 +97,28 @@ public class PlayerController : MonoBehaviour
                 timeDodge = 0.8f;
             }
         }
+    }
+
+    private void Attack() 
+    {
+        Collider[] getEnemies = Physics.OverlapSphere(transform.position, 1);
+        foreach (Collider collider in getEnemies) 
+        {
+            if(collider.gameObject.layer == 7) 
+            {
+                Instantiate(particleDestructable, collider.transform.position, Quaternion.identity);
+                Destroy(collider.gameObject);
+            }
+            else if(collider.gameObject.layer == 6) 
+            {
+                collider.GetComponent<Enemy>().TakeDamage(swordDamage);
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(transform.position, 1);
     }
 
     public bool IsWalking()
