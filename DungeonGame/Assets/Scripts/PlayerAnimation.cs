@@ -7,17 +7,27 @@ public class PlayerAnimation : MonoBehaviour
     private PlayerController playerController;
     private Animator animator;
 
+    const string MOVE = "Move";
+    const string DODGE = "Dodge";
+    const string GETHIT = "GetHit";
+
     void Start()
     {
         animator = GetComponent<Animator>();
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        playerController = GetComponentInParent<PlayerController>();
+        //playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
-    
     void Update()
     {
-        animator.SetBool("Move", playerController.IsWalking());
-        animator.SetBool("Dodge", playerController.CanDodge != true);
+        animator.SetBool(MOVE, playerController.IsWalking());
+        animator.SetBool(DODGE, playerController.CanDodge != true);
+
+        if(playerController.IsGetHit()) 
+        {
+            animator.SetTrigger(GETHIT);
+        }
+
         if(playerController.CanAttack != true) 
         {
             animator.SetLayerWeight(1, 1f);

@@ -1,28 +1,37 @@
+using Dev.ComradeVanti.WaitForAnim;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    const string GETHIT = "GetHit";
+    const string DIE = "Die";
+
+    [SerializeField] private float currentLife;
+
+    private Animator animator;
     private float life = 3;
-    private float currentLife;
 
     void Start()
     {
-        currentLife = life;
+        currentLife = life;  
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if(currentLife <= 0) 
         {
-            Destroy(gameObject);
+            animator.SetTrigger(DIE);
+            Destroy(gameObject, 2f);
         }
     }
 
     public void TakeDamage(float damage) 
     {
         currentLife -= damage;
+        animator.SetTrigger(GETHIT);
     }
 }

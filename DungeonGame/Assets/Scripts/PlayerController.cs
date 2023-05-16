@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,29 +8,33 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Inputs inputs;
     [SerializeField] private GameObject particleDestructable;
+
+    [SerializeField] private float life = 5;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float dodgeForce;
-    [SerializeField] private float rotateSpeed;
-    
+    [SerializeField] private float rotateSpeed; 
     [SerializeField] private float swordDamage;
+
+
 
 
     private Rigidbody rb;
     private bool isWalk;
 
-    private float timeDodge;
-    private float timeAttack;
+    private float timeToDodge;
+    private float timeToAttack;
     private bool canAttack = true;
     private bool canDodge = true;
     public bool CanDodge { get { return canDodge; }}
     public bool CanAttack { get { return canAttack; }}
+    private bool isTakeDamage = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
-        timeDodge = 0.8f;
-        timeAttack = 0.6f;
+        timeToDodge = 0.8f;
+        timeToAttack = 0.6f;
         
     }
 
@@ -47,27 +52,27 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (canAttack)
+        if (inputs.GetAttackButton())
         {
-            if (inputs.GetAttackButton())
+            if (canAttack)
             {
                 canAttack = false;
-                Attack();              
+                Attack();
             }
         }
 
-        AttackTime();
-        DodgeTime();
+        CalculatorCooldown(canAttack, timeToAttack, 0.6f);
+        CalculatorCooldown(canDodge, timeToDodge, 0.8f);
     }
 
     private void FixedUpdate()
     {
         Vector2 inputVector = inputs.GetMovementVectorNormalized();       
         Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
-        Vector3 rotate = new Vector3(0, inputVector.x, 0) * rotateSpeed;
+        Vector3 rotate = new Vector3(0, inputVector.x, 0) * rotateSpeed * 100f;
         moveDir = rb.rotation * moveDir;
         rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime);
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(rotate * 100f * Time.fixedDeltaTime));
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(rotate * Time.fixedDeltaTime));
 
         isWalk = (moveDir != Vector3.zero);
     }
@@ -76,11 +81,13 @@ public class PlayerController : MonoBehaviour
     {
         if (canAttack == false)
         {
-            timeAttack -= Time.deltaTime;
-            if (timeAttack <= 0)
+            timeToAttack -= Time.deltaTime;
+            if (timeToAttack <= 0)
             {
                 canAttack = true;
-                timeAttack = 0.6f;
+
+                float timeAnimation = 0.6f;
+                timeToAttack = timeAnimation;
             }
         }     
     }
@@ -89,12 +96,28 @@ public class PlayerController : MonoBehaviour
     {
         if (canDodge == false)
         {
-            timeDodge -= Time.deltaTime;
+            timeToDodge -= Time.deltaTime;
 
-            if (timeDodge <= 0)
+            if (timeToDodge <= 0)
             {
                 canDodge = true;
-                timeDodge = 0.8f;
+
+                float timeAnimation = 0.8f;
+                timeToDodge = timeAnimation;
+            }
+        }
+    }
+
+    private void CalculatorCooldown(bool x, float time, float timeAnimation) 
+    {
+        if(x == false) 
+        {
+            time -= Time.deltaTime;
+
+            if(time <= 0) 
+            {
+                x = true;
+                time = timeAnimation; 
             }
         }
     }
@@ -116,9 +139,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    public void TakeDamage(float damage) 
     {
-        Gizmos.DrawSphere(transform.position, 1);
+        isTakeDamage = false;
+
+        if(damage > 0)
+        {
+            life -= damage;
+            isTakeDamage = true;
+        }
+    }
+
+    public bool IsGetHit ()
+    {
+        return isTakeDamage;
     }
 
     public bool IsWalking()
