@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Config",
+                    "name": "Configurations",
                     "type": "Button",
                     "id": "7194adcd-25fd-493d-9014-1ff2e4e09caf",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Utility1",
+                    "name": "Utility_1",
                     "type": "Button",
                     "id": "cbfab206-4cfa-4540-ba36-9853bf67a0d6",
                     "expectedControlType": "Button",
@@ -136,7 +136,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Config",
+                    "action": "Configurations",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -147,7 +147,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Utility1",
+                    "action": "Utility_1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -55,7 +55,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Config"",
+                    ""name"": ""Configurations"",
                     ""type"": ""Button"",
                     ""id"": ""7194adcd-25fd-493d-9014-1ff2e4e09caf"",
                     ""expectedControlType"": ""Button"",
@@ -64,7 +64,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Utility1"",
+                    ""name"": ""Utility_1"",
                     ""type"": ""Button"",
                     ""id"": ""cbfab206-4cfa-4540-ba36-9853bf67a0d6"",
                     ""expectedControlType"": ""Button"",
@@ -158,7 +158,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Config"",
+                    ""action"": ""Configurations"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -169,7 +169,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Utility1"",
+                    ""action"": ""Utility_1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -183,8 +183,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
-        m_Player_Config = m_Player.FindAction("Config", throwIfNotFound: true);
-        m_Player_Utility1 = m_Player.FindAction("Utility1", throwIfNotFound: true);
+        m_Player_Configurations = m_Player.FindAction("Configurations", throwIfNotFound: true);
+        m_Player_Utility_1 = m_Player.FindAction("Utility_1", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -247,8 +247,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Dodge;
-    private readonly InputAction m_Player_Config;
-    private readonly InputAction m_Player_Utility1;
+    private readonly InputAction m_Player_Configurations;
+    private readonly InputAction m_Player_Utility_1;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -256,8 +256,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
-        public InputAction @Config => m_Wrapper.m_Player_Config;
-        public InputAction @Utility1 => m_Wrapper.m_Player_Utility1;
+        public InputAction @Configurations => m_Wrapper.m_Player_Configurations;
+        public InputAction @Utility_1 => m_Wrapper.m_Player_Utility_1;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -276,12 +276,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dodge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
-                @Config.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfig;
-                @Config.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfig;
-                @Config.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfig;
-                @Utility1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility1;
-                @Utility1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility1;
-                @Utility1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility1;
+                @Configurations.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfigurations;
+                @Configurations.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfigurations;
+                @Configurations.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfigurations;
+                @Utility_1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility_1;
+                @Utility_1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility_1;
+                @Utility_1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility_1;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -295,12 +295,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
-                @Config.started += instance.OnConfig;
-                @Config.performed += instance.OnConfig;
-                @Config.canceled += instance.OnConfig;
-                @Utility1.started += instance.OnUtility1;
-                @Utility1.performed += instance.OnUtility1;
-                @Utility1.canceled += instance.OnUtility1;
+                @Configurations.started += instance.OnConfigurations;
+                @Configurations.performed += instance.OnConfigurations;
+                @Configurations.canceled += instance.OnConfigurations;
+                @Utility_1.started += instance.OnUtility_1;
+                @Utility_1.performed += instance.OnUtility_1;
+                @Utility_1.canceled += instance.OnUtility_1;
             }
         }
     }
@@ -310,7 +310,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
-        void OnConfig(InputAction.CallbackContext context);
-        void OnUtility1(InputAction.CallbackContext context);
+        void OnConfigurations(InputAction.CallbackContext context);
+        void OnUtility_1(InputAction.CallbackContext context);
     }
 }

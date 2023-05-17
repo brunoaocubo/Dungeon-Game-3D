@@ -8,21 +8,29 @@ public class PlayerController : MonoBehaviour
     [Header("REFERENCES")]
     [SerializeField] private Inputs inputs;
     [SerializeField] private GameObject hitParticle;
+    //[SerializeField] private Inventory inventory;
+
 
     [Header("STATUS")]
-    [SerializeField] private float health = 100;
+    [SerializeField] private float totalHealth = 100;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float dodgeForce;
     [SerializeField] private float rotateSpeed; 
     [SerializeField] private float swordDamage;
+    [SerializeField] private int flaskLife = 3;
+
 
     private Rigidbody playerRigdbody;
-    private bool isWalk;
-    private bool isTakeDamage = false;
+    private float health;
+    private float timeFlask = 3f;
     private float timeAnimationDodge = 0.6f;
     private float timeAnimationAttack = 0.8f;
+    private bool isWalk;
+    private bool canTakeDamage = false;
+    private bool canUseFlask = true;
     private bool canAttack = true;
     private bool canDodge = true;
+  
     public bool CanDodge { get { return canDodge; }}
     public bool CanAttack { get { return canAttack; }}
 
@@ -33,17 +41,29 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         playerRigdbody = GetComponent<Rigidbody>();  
+        health = totalHealth;
     }
 
     private void Update()
     {
+        if(inputs.GetUtilityButton1())
+        {
+            if(canUseFlask)
+            {
+                canUseFlask = false;
+                float value = 25f;
+                StartCoroutine(UseFlask(flaskLife, value));  
+            }
+                        
+        }
+
         if (inputs.GetDodgeButton())
         {
             if (canDodge)
             {
                 canDodge = false;
                 playerRigdbody.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
-                StartCoroutine(CalculatorCooldown(canDodge, timeAnimationDodge));             
+                StartCoroutine(CooldownAnimation(canDodge, timeAnimationDodge));             
             }
         }
 
@@ -92,32 +112,45 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        StartCoroutine(CalculatorCooldown(canAttack, timeAnimationAttack));
+        StartCoroutine(CooldownAnimation(canAttack, timeAnimationAttack));
     }
 
     public void TakeDamage(Vector3 hitPoint, float damage) 
     {
-        Instantiate(hitParticle, hitPoint, Quaternion.identity);
-        isTakeDamage = false;
-
-        if(damage > 0)
+        if(canTakeDamage)
         {
             health -= damage;
-            isTakeDamage = true;
-        }
+            canTakeDamage = false;
+            Instantiate(hitParticle, hitPoint, Quaternion.identity);
+            CooldownAnimation(canTakeDamage, 1f);
+        }     
     }
 
-    IEnumerator CalculatorCooldown(bool x, float timeAnimation)
+    IEnumerator UseFlask(int typeFlask, float value)
+    {        
+        if(typeFlask == flaskLife)
+        {       
+            flaskLife --;
+            health += value;     
+        }  
+
+        yield return new WaitForSeconds(timeFlask);  
+        canUseFlask = true;  
+        
+    }
+
+    IEnumerator CooldownAnimation(bool x, float timeAnimation)
     {
         yield return new WaitForSeconds(timeAnimation);
 
         if (x == canAttack) { canAttack = true; }
         else if (x == canDodge) { canDodge = true; }
+        else if (x == canTakeDamage) { canTakeDamage = true; }
     }
 
     public bool IsGetHit ()
     {
-        return isTakeDamage;
+        return canTakeDamage;
     }
 
     public bool IsWalking()

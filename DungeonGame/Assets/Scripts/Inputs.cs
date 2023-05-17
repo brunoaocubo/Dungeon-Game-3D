@@ -9,8 +9,6 @@ public static class InputActionButton
     public static bool GetButton(this InputAction action) => action.ReadValue<float>() > 0;
     public static bool GetButtonDown(this InputAction action) => action.triggered && action.ReadValue<float>() > 0;
     public static bool GetButtonUp(this InputAction action) => action.triggered && action.ReadValue<float>() == 0;
-
-
 }
 
 public class Inputs : MonoBehaviour
@@ -31,24 +29,49 @@ public class Inputs : MonoBehaviour
     }
     public bool GetAttackButton() 
     {
-        bool isAttack = false;
+        bool pressFire1 = false;
 
         if(InputActionButton.GetButtonDown(inputActions.Player.Attack)) 
         {
-            isAttack = true;
+            pressFire1 = true;
         }       
-        return isAttack;
+        return pressFire1;
     }
 
     public bool GetDodgeButton()
     {
-        bool isAttack = false;
+        bool pressSpace = false;
 
         if (InputActionButton.GetButtonDown(inputActions.Player.Dodge))
         {
-            isAttack = true;
+            pressSpace = true;
         }
-        return isAttack;
+        return pressSpace;
     }
 
+    public bool GetEscapeButton()
+    {
+        bool pressEsc = false;
+
+        if(InputActionButton.GetButtonDown(inputActions.Player.Configurations))
+        {
+            pressEsc = true;
+        }
+        else if(InputActionButton.GetButtonUp(inputActions.Player.Configurations))
+        {
+            pressEsc = false;
+        }
+        return pressEsc;
+    }
+    
+    public bool GetUtilityButton1()
+    {
+        bool pressUtilityBtn1 = false;
+
+        if(InputActionButton.GetButtonDown(inputActions.Player.Utility_1))
+        {
+            pressUtilityBtn1 = true;
+        }
+        return pressUtilityBtn1;
+    }
 }
