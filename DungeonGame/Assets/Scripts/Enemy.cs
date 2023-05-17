@@ -1,37 +1,83 @@
-using Dev.ComradeVanti.WaitForAnim;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GlobalConstants;
 
 public class Enemy : MonoBehaviour
 {
-    const string GETHIT = "GetHit";
-    const string DIE = "Die";
+    [Header("REFERENCES")]
+    [SerializeField] private GameObject player;
+    [SerializeField] private Transform lookAt;
+    [SerializeField] private GameObject hitParticle;
 
-    [SerializeField] private float currentLife;
+    [Header("STATUS")]
+    [SerializeField] private float attackDamage;
+    [SerializeField] private float attackRange; 
 
     private Animator animator;
+    private RuntimeAnimatorController runTimeAnimator;
+    private RaycastHit hit;
     private float life = 3;
+    private float currentLife;
+    private float timeAnimationAttack;
+    private bool canAttack = true;
 
     void Start()
     {
         currentLife = life;  
         animator = GetComponent<Animator>();
-    }
+        runTimeAnimator = animator.runtimeAnimatorController;
 
-    
-    void Update()
-    {
-        if(currentLife <= 0) 
+        for (int i = 0; i < runTimeAnimator.animationClips.Length; i++) 
         {
-            animator.SetTrigger(DIE);
-            Destroy(gameObject, 2f);
+            if (runTimeAnimator.animationClips[i].name == Constants.ATTACK_CLIP) 
+            {
+                timeAnimationAttack = runTimeAnimator.animationClips[i].length;
+            }
         }
     }
 
-    public void TakeDamage(float damage) 
+    void Update()
     {
+        if(Vector3.Distance(transform.position, player.transform.position) < attackRange) 
+        {           
+            if(canAttack) 
+            {
+                StartCoroutine(AttackPlayer(timeAnimationAttack));
+            }  
+        }
+
+        if(currentLife <= 0) 
+        {
+            animator.SetTrigger(Constants.DIE);
+            Destroy(gameObject, 2f);
+        }
+
+        Debug.DrawRay(lookAt.position, transform.forward, Color.black);
+    }
+
+    public void TakeDamage(Vector3 hitPoint, float damage) 
+    {
+        Instantiate(hitParticle, hitPoint, Quaternion.identity);
         currentLife -= damage;
-        animator.SetTrigger(GETHIT);
+
+        animator.SetTrigger(Constants.GETHIT);
+    }
+
+    IEnumerator AttackPlayer(float timeAnimationAttack) 
+    {
+        canAttack = false;
+        animator.SetBool(Constants.ATTACK, !canAttack);
+
+        if(Physics.Raycast(lookAt.position, transform.forward, out hit, attackRange)) 
+        {
+            if (hit.collider.gameObject == player) 
+            {
+                hit.collider.gameObject.GetComponent<PlayerController>().TakeDamage(hit.point, attackDamage);
+            }
+        }
+       
+        yield return new WaitForSeconds(timeAnimationAttack);
+        canAttack = true;
     }
 }
