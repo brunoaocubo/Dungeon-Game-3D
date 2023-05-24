@@ -11,16 +11,16 @@ public class PlayerAnimation : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         playerController = GetComponentInParent<PlayerController>();
     }
 
     void Update()
     {
+        
+        //animator.SetBool(Constants.WALK, playerController.IsWalking());
+        //animator.SetBool(Constants.DODGE, playerController.IsDodge());
         /*
-        animator.SetBool(Constants.WALK, playerController.IsWalking());
-        animator.SetBool(Constants.DODGE, playerController.IsDodge());
-
         if(playerController.IsGetHit()) 
         { 
             animator.SetTrigger(Constants.GETHIT); 

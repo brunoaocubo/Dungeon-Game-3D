@@ -25,12 +25,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     ""maps"": [
         {
             ""name"": ""Player"",
-            ""id"": ""84cc6fad-287a-4c3c-95fb-229e9bc2ea1f"",
+            ""id"": ""048dd18f-1a5f-4579-bde0-25c8c55568e3"",
             ""actions"": [
                 {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
-                    ""id"": ""890f26b8-6af8-4fe8-8fba-9dc31962dddc"",
+                    ""id"": ""65d540eb-6e97-4a57-9d96-6bb9459cf501"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -39,7 +39,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
-                    ""id"": ""1cb24fe5-ec17-471b-8d30-f27497731d4b"",
+                    ""id"": ""ffb1a6a7-357c-43fd-84bd-28b809aaad34"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -48,31 +48,16 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""Dodge"",
                     ""type"": ""Button"",
-                    ""id"": ""a95078c1-2728-4997-9cc4-3d9645380f88"",
+                    ""id"": ""3055a825-4e61-4fc0-9c9b-ddec571f400c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-<<<<<<< HEAD
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
-                    ""id"": ""b277e386-fa4c-4493-a1ac-a0be01d107e8"",
-=======
-                    ""name"": ""Config"",
-                    ""type"": ""Button"",
-                    ""id"": ""7194adcd-25fd-493d-9014-1ff2e4e09caf"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Utility1"",
-                    ""type"": ""Button"",
-                    ""id"": ""cbfab206-4cfa-4540-ba36-9853bf67a0d6"",
->>>>>>> parent of b2bf63e (DungeonGame)
+                    ""id"": ""f09ceee9-6fb8-4f94-837a-2537dacf50f8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -81,41 +66,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""b063f6f9-8a65-415d-afba-03c634e3698b"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""19fd6193-7eb5-4d97-8d04-2bb7d80c38fe"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dodge"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1677c99c-d52e-4291-beb7-7fa314e8f57a"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""2D Vector"",
-                    ""id"": ""ed85fd4e-a0ce-4bdb-b879-182680dc4b3a"",
+                    ""id"": ""1d022f90-3cf9-4e0b-871c-1a5a169ddee0"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -126,7 +78,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""b0d0314d-906d-481d-8dad-36a36f98c39e"",
+                    ""id"": ""7cff3f79-72c1-45ae-8533-cb2a11076a8d"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -137,7 +89,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""10b9d038-1715-4cc4-8507-1dd6adaf088f"",
+                    ""id"": ""51dbbe62-860a-49b5-be2a-3499c8e4b9db"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -148,7 +100,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""2ad201ff-8f6b-4a1f-9f8e-3ba0afb5f396"",
+                    ""id"": ""eefadafd-ffb7-4b8c-8c4b-48ed66e51c3e"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -159,7 +111,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""b8fc3888-2197-442f-b0a2-d86b80b020c7"",
+                    ""id"": ""881adaf8-fce4-48bd-987a-fe39772c1560"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -167,14 +119,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-<<<<<<< HEAD
-=======
                 },
                 {
                     ""name"": """",
-                    ""id"": ""93bf67c4-146e-4983-9b49-ee760e3a1a07"",
+                    ""id"": ""a8b938c7-0cc4-4a1a-9972-b6e0609c93ad"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Attack"",
@@ -183,9 +133,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ba8d4951-de53-43f6-82a5-215979a0fc18"",
+                    ""id"": ""56d45c18-3b0b-4b75-8a90-7646de4e09d4"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dodge"",
@@ -194,26 +144,14 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b3e3033e-143e-4469-8b73-a723f687f013"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""id"": ""830eba2d-98d2-4605-b573-e38ffe741236"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Config"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d2a15bca-8ed9-4791-89ff-16bd51a82a6b"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Utility1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
->>>>>>> parent of b2bf63e (DungeonGame)
                 }
             ]
         }
@@ -225,12 +163,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
-<<<<<<< HEAD
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-=======
-        m_Player_Config = m_Player.FindAction("Config", throwIfNotFound: true);
-        m_Player_Utility1 = m_Player.FindAction("Utility1", throwIfNotFound: true);
->>>>>>> parent of b2bf63e (DungeonGame)
     }
 
     public void Dispose()
@@ -293,12 +226,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Dodge;
-<<<<<<< HEAD
     private readonly InputAction m_Player_Interact;
-=======
-    private readonly InputAction m_Player_Config;
-    private readonly InputAction m_Player_Utility1;
->>>>>>> parent of b2bf63e (DungeonGame)
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -306,12 +234,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
-<<<<<<< HEAD
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
-=======
-        public InputAction @Config => m_Wrapper.m_Player_Config;
-        public InputAction @Utility1 => m_Wrapper.m_Player_Utility1;
->>>>>>> parent of b2bf63e (DungeonGame)
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -330,18 +253,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dodge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
-<<<<<<< HEAD
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-=======
-                @Config.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfig;
-                @Config.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfig;
-                @Config.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfig;
-                @Utility1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility1;
-                @Utility1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility1;
-                @Utility1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility1;
->>>>>>> parent of b2bf63e (DungeonGame)
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -355,18 +269,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
-<<<<<<< HEAD
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
-=======
-                @Config.started += instance.OnConfig;
-                @Config.performed += instance.OnConfig;
-                @Config.canceled += instance.OnConfig;
-                @Utility1.started += instance.OnUtility1;
-                @Utility1.performed += instance.OnUtility1;
-                @Utility1.canceled += instance.OnUtility1;
->>>>>>> parent of b2bf63e (DungeonGame)
             }
         }
     }
@@ -376,11 +281,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
-<<<<<<< HEAD
         void OnInteract(InputAction.CallbackContext context);
-=======
-        void OnConfig(InputAction.CallbackContext context);
-        void OnUtility1(InputAction.CallbackContext context);
->>>>>>> parent of b2bf63e (DungeonGame)
     }
 }

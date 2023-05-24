@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using GlobalConstants;
+using System.Diagnostics.Contracts;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,22 +10,14 @@ public class PlayerController : MonoBehaviour
     [Header("REFERENCES")]
     [SerializeField] private Inputs inputs;
     [SerializeField] private GameObject hitParticle;
-<<<<<<< HEAD
-
 
     [Header("STATUS")]
-=======
-
-    [Header("STATUS")]
-    [SerializeField] private float health = 100;
->>>>>>> parent of b2bf63e (DungeonGame)
     [SerializeField] private float moveSpeed;
     [SerializeField] private float dodgeForce;
     [SerializeField] private float rotateSpeed;
     [SerializeField] private float swordDamage;
 
     private Rigidbody playerRigdbody;
-<<<<<<< HEAD
     private Animator animator;
     private Vector2 inputVector;
     private float timeAnimationDodge = 0.6f;
@@ -32,17 +26,6 @@ public class PlayerController : MonoBehaviour
     public bool isTakeDamage = false;
     private bool isAttacking = false;
     private bool isDodge = false;
-=======
-    private bool isWalk;
-    private bool isTakeDamage = false;
-    private float timeAnimationDodge = 0.6f;
-    private float timeAnimationAttack = 0.8f;
-    private bool canAttack = true;
-    private bool canDodge = true;
-    public bool CanDodge { get { return canDodge; }}
-    public bool CanAttack { get { return canAttack; }}
-
->>>>>>> parent of b2bf63e (DungeonGame)
     #endregion
 
     #region STARTS, UPDATES...
@@ -50,41 +33,16 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
-<<<<<<< HEAD
         playerRigdbody = GetComponent<Rigidbody>();
-=======
-        playerRigdbody = GetComponent<Rigidbody>();  
->>>>>>> parent of b2bf63e (DungeonGame)
     }
 
     void Start()
     {
-<<<<<<< HEAD
         animator = GetComponentInChildren<Animator>();
         inputVector = inputs.GetMovementVectorNormalized();
         inputs.OnInteractAction += Inputs_OnInteractAction;
         inputs.OnAttackAction += Inputs_OnAttackAction;
         inputs.OnDodgeAction += Inputs_OnDodgeAction;
-=======
-        if (inputs.GetDodgeButton())
-        {
-            if (canDodge)
-            {
-                canDodge = false;
-                playerRigdbody.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
-                StartCoroutine(CalculatorCooldown(canDodge, timeAnimationDodge));             
-            }
-        }
-
-        if (inputs.GetAttackButton())
-        {
-            if (canAttack)
-            {
-                canAttack = false;
-                Attack();
-            }
-        }
->>>>>>> parent of b2bf63e (DungeonGame)
     }
 
     private void FixedUpdate()
@@ -166,49 +124,25 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-<<<<<<< HEAD
         StartCoroutine(CalculatorCooldown(isAttacking, timeAnimationAttack));
-=======
-        StartCoroutine(CalculatorCooldown(canAttack, timeAnimationAttack));
->>>>>>> parent of b2bf63e (DungeonGame)
     }
 
     public void TakeDamage(Vector3 hitPoint, float damage) 
     {
         Instantiate(hitParticle, hitPoint, Quaternion.identity);
-<<<<<<< HEAD
         //health -= damage;
         animator.SetTrigger(Constants.GETHIT);
-        /*
-        if(canTakeDamage)
-        {
-            health -= damage;
-            canTakeDamage = false;
-            Instantiate(hitParticle, hitPoint, Quaternion.identity);
-            CooldownAnimation(canTakeDamage, 1f);
-        }     */
-=======
         isTakeDamage = false;
-
-        if(damage > 0)
-        {
-            health -= damage;
-            isTakeDamage = true;
-        }
->>>>>>> parent of b2bf63e (DungeonGame)
+        Instantiate(hitParticle, hitPoint, Quaternion.identity);
+        CalculatorCooldown(isTakeDamage, 1f);
+        
     }
 
     IEnumerator CalculatorCooldown(bool x, float timeAnimation)
     {
         yield return new WaitForSeconds(timeAnimation);
-<<<<<<< HEAD
         if (x == isAttacking) { isAttacking = false; }     
         if (x == isDodge) { isDodge = false; }
-=======
-
-        if (x == canAttack) { canAttack = true; }
-        else if (x == canDodge) { canDodge = true; }
->>>>>>> parent of b2bf63e (DungeonGame)
     }
 
     public bool IsGetHit ()

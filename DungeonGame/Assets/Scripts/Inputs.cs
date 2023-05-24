@@ -2,17 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-<<<<<<< HEAD
-=======
-public static class InputActionButton
-{
-    public static bool GetButton(this InputAction action) => action.ReadValue<float>() > 0;
-    public static bool GetButtonDown(this InputAction action) => action.triggered && action.ReadValue<float>() > 0;
-    public static bool GetButtonUp(this InputAction action) => action.triggered && action.ReadValue<float>() == 0;
-
-
-}
->>>>>>> parent of b2bf63e (DungeonGame)
 
 public class Inputs : MonoBehaviour
 {
@@ -51,29 +40,4 @@ public class Inputs : MonoBehaviour
         inputVector = inputVector.normalized;
         return inputVector;
     }
-<<<<<<< HEAD
-=======
-    public bool GetAttackButton() 
-    {
-        bool isAttack = false;
-
-        if(InputActionButton.GetButtonDown(inputActions.Player.Attack)) 
-        {
-            isAttack = true;
-        }       
-        return isAttack;
-    }
-
-    public bool GetDodgeButton()
-    {
-        bool isAttack = false;
-
-        if (InputActionButton.GetButtonDown(inputActions.Player.Dodge))
-        {
-            isAttack = true;
-        }
-        return isAttack;
-    }
-
->>>>>>> parent of b2bf63e (DungeonGame)
 }
