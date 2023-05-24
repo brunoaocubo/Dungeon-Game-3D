@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1134,13 +1134,18 @@ MonoBehaviour:
   inputs: {fileID: 325552758}
   hitParticle: {fileID: 1714493189776109042, guid: 5bab57547e0023242915339dbe784de1, type: 3}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   totalHealth: 100
 >>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
+=======
+  health: 100
+>>>>>>> parent of b2bf63e (DungeonGame)
   moveSpeed: 3
   dodgeForce: 8
   rotateSpeed: 5
   swordDamage: 1
+<<<<<<< HEAD
 <<<<<<< HEAD
   isTakeDamage: 0
 --- !u!114 &304937438
@@ -1158,6 +1163,8 @@ MonoBehaviour:
 =======
   flaskLife: 3
 >>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
+=======
+>>>>>>> parent of b2bf63e (DungeonGame)
 --- !u!1001 &312607379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3637,7 +3644,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.000000011755034, y: 0.973249, z: -0.22975293, w: 0.000000049795123}
+  m_LocalRotation: {x: 0.0000000033306122, y: 0.973249, z: -0.22975291, w: 0.0000000141087035}
   m_LocalPosition: {x: 3.9999998, y: 3, z: 6.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7330,7 +7337,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750686170}
-  m_LocalRotation: {x: 0.000000011755034, y: 0.973249, z: -0.22975293, w: 0.000000049795123}
+  m_LocalRotation: {x: 0.0000000033306122, y: 0.973249, z: -0.22975291, w: 0.0000000141087035}
   m_LocalPosition: {x: 3.9999998, y: 3, z: 6.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

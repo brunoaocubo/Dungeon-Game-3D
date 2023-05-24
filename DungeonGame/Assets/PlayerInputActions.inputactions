@@ -33,9 +33,24 @@
                     "initialStateCheck": false
                 },
                 {
+<<<<<<< HEAD
                     "name": "Interact",
                     "type": "Button",
                     "id": "b277e386-fa4c-4493-a1ac-a0be01d107e8",
+=======
+                    "name": "Config",
+                    "type": "Button",
+                    "id": "7194adcd-25fd-493d-9014-1ff2e4e09caf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Utility1",
+                    "type": "Button",
+                    "id": "cbfab206-4cfa-4540-ba36-9853bf67a0d6",
+>>>>>>> parent of b2bf63e (DungeonGame)
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -130,6 +145,53 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+<<<<<<< HEAD
+=======
+                },
+                {
+                    "name": "",
+                    "id": "93bf67c4-146e-4983-9b49-ee760e3a1a07",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ba8d4951-de53-43f6-82a5-215979a0fc18",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b3e3033e-143e-4469-8b73-a723f687f013",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Config",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d2a15bca-8ed9-4791-89ff-16bd51a82a6b",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Utility1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+>>>>>>> parent of b2bf63e (DungeonGame)
                 }
             ]
         }

@@ -55,9 +55,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+<<<<<<< HEAD
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""b277e386-fa4c-4493-a1ac-a0be01d107e8"",
+=======
+                    ""name"": ""Config"",
+                    ""type"": ""Button"",
+                    ""id"": ""7194adcd-25fd-493d-9014-1ff2e4e09caf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility1"",
+                    ""type"": ""Button"",
+                    ""id"": ""cbfab206-4cfa-4540-ba36-9853bf67a0d6"",
+>>>>>>> parent of b2bf63e (DungeonGame)
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -152,6 +167,53 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+<<<<<<< HEAD
+=======
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93bf67c4-146e-4983-9b49-ee760e3a1a07"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba8d4951-de53-43f6-82a5-215979a0fc18"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b3e3033e-143e-4469-8b73-a723f687f013"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Config"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d2a15bca-8ed9-4791-89ff-16bd51a82a6b"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Utility1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+>>>>>>> parent of b2bf63e (DungeonGame)
                 }
             ]
         }
@@ -163,7 +225,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
+<<<<<<< HEAD
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+=======
+        m_Player_Config = m_Player.FindAction("Config", throwIfNotFound: true);
+        m_Player_Utility1 = m_Player.FindAction("Utility1", throwIfNotFound: true);
+>>>>>>> parent of b2bf63e (DungeonGame)
     }
 
     public void Dispose()
@@ -226,7 +293,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Dodge;
+<<<<<<< HEAD
     private readonly InputAction m_Player_Interact;
+=======
+    private readonly InputAction m_Player_Config;
+    private readonly InputAction m_Player_Utility1;
+>>>>>>> parent of b2bf63e (DungeonGame)
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -234,7 +306,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
+<<<<<<< HEAD
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+=======
+        public InputAction @Config => m_Wrapper.m_Player_Config;
+        public InputAction @Utility1 => m_Wrapper.m_Player_Utility1;
+>>>>>>> parent of b2bf63e (DungeonGame)
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -253,9 +330,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dodge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
+<<<<<<< HEAD
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+=======
+                @Config.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfig;
+                @Config.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfig;
+                @Config.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfig;
+                @Utility1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility1;
+                @Utility1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility1;
+                @Utility1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility1;
+>>>>>>> parent of b2bf63e (DungeonGame)
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -269,9 +355,18 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
+<<<<<<< HEAD
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+=======
+                @Config.started += instance.OnConfig;
+                @Config.performed += instance.OnConfig;
+                @Config.canceled += instance.OnConfig;
+                @Utility1.started += instance.OnUtility1;
+                @Utility1.performed += instance.OnUtility1;
+                @Utility1.canceled += instance.OnUtility1;
+>>>>>>> parent of b2bf63e (DungeonGame)
             }
         }
     }
@@ -281,6 +376,11 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+<<<<<<< HEAD
         void OnInteract(InputAction.CallbackContext context);
+=======
+        void OnConfig(InputAction.CallbackContext context);
+        void OnUtility1(InputAction.CallbackContext context);
+>>>>>>> parent of b2bf63e (DungeonGame)
     }
 }

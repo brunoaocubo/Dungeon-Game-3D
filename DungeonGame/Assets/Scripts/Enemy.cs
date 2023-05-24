@@ -39,13 +39,10 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        animator.SetBool(Constants.ATTACK, !canAttack);
-        
         if(Vector3.Distance(transform.position, player.transform.position) < attackRange) 
         {           
             if(canAttack) 
             {
-                canAttack = false;
                 StartCoroutine(AttackPlayer(timeAnimationAttack));
             }  
         }
@@ -69,6 +66,9 @@ public class Enemy : MonoBehaviour
 
     IEnumerator AttackPlayer(float timeAnimationAttack) 
     {
+        canAttack = false;
+        animator.SetBool(Constants.ATTACK, !canAttack);
+
         if(Physics.Raycast(lookAt.position, transform.forward, out hit, attackRange)) 
         {
             if (hit.collider.gameObject == player) 
@@ -76,6 +76,7 @@ public class Enemy : MonoBehaviour
                 hit.collider.gameObject.GetComponent<PlayerController>().TakeDamage(hit.point, attackDamage);
             }
         }
+       
         yield return new WaitForSeconds(timeAnimationAttack);
         canAttack = true;
     }
