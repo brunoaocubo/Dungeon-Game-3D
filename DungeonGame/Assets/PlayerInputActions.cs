@@ -55,7 +55,11 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+<<<<<<< HEAD
                     ""name"": ""Utility1"",
+=======
+                    ""name"": ""Configurations"",
+>>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
                     ""type"": ""Button"",
                     ""id"": ""cbfab206-4cfa-4540-ba36-9853bf67a0d6"",
                     ""expectedControlType"": ""Button"",
@@ -64,7 +68,11 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+<<<<<<< HEAD
                     ""name"": ""Interact"",
+=======
+                    ""name"": ""Utility_1"",
+>>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
                     ""type"": ""Button"",
                     ""id"": ""ee6f0d3e-6b3e-47bf-bdc6-c20daa7d0de1"",
                     ""expectedControlType"": ""Button"",
@@ -156,7 +164,11 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
+<<<<<<< HEAD
                     ""action"": ""Dodge"",
+=======
+                    ""action"": ""Configurations"",
+>>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -167,7 +179,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Utility1"",
+                    ""action"": ""Utility_1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -203,9 +215,14 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
+<<<<<<< HEAD
         m_Player_Utility1 = m_Player.FindAction("Utility1", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Settings = m_Player.FindAction("Settings", throwIfNotFound: true);
+=======
+        m_Player_Configurations = m_Player.FindAction("Configurations", throwIfNotFound: true);
+        m_Player_Utility_1 = m_Player.FindAction("Utility_1", throwIfNotFound: true);
+>>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
     }
 
     public void Dispose()
@@ -268,9 +285,14 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Dodge;
+<<<<<<< HEAD
     private readonly InputAction m_Player_Utility1;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Settings;
+=======
+    private readonly InputAction m_Player_Configurations;
+    private readonly InputAction m_Player_Utility_1;
+>>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -278,9 +300,14 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
+<<<<<<< HEAD
         public InputAction @Utility1 => m_Wrapper.m_Player_Utility1;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Settings => m_Wrapper.m_Player_Settings;
+=======
+        public InputAction @Configurations => m_Wrapper.m_Player_Configurations;
+        public InputAction @Utility_1 => m_Wrapper.m_Player_Utility_1;
+>>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -299,6 +326,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dodge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
+<<<<<<< HEAD
                 @Utility1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility1;
                 @Utility1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility1;
                 @Utility1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility1;
@@ -308,6 +336,14 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Settings.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSettings;
                 @Settings.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSettings;
                 @Settings.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSettings;
+=======
+                @Configurations.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfigurations;
+                @Configurations.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfigurations;
+                @Configurations.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnConfigurations;
+                @Utility_1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility_1;
+                @Utility_1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility_1;
+                @Utility_1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility_1;
+>>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -321,6 +357,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
+<<<<<<< HEAD
                 @Utility1.started += instance.OnUtility1;
                 @Utility1.performed += instance.OnUtility1;
                 @Utility1.canceled += instance.OnUtility1;
@@ -330,6 +367,14 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Settings.started += instance.OnSettings;
                 @Settings.performed += instance.OnSettings;
                 @Settings.canceled += instance.OnSettings;
+=======
+                @Configurations.started += instance.OnConfigurations;
+                @Configurations.performed += instance.OnConfigurations;
+                @Configurations.canceled += instance.OnConfigurations;
+                @Utility_1.started += instance.OnUtility_1;
+                @Utility_1.performed += instance.OnUtility_1;
+                @Utility_1.canceled += instance.OnUtility_1;
+>>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
             }
         }
     }
@@ -339,8 +384,13 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+<<<<<<< HEAD
         void OnUtility1(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnSettings(InputAction.CallbackContext context);
+=======
+        void OnConfigurations(InputAction.CallbackContext context);
+        void OnUtility_1(InputAction.CallbackContext context);
+>>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
     }
 }

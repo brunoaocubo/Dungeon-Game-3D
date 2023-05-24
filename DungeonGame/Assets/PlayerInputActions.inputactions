@@ -33,7 +33,11 @@
                     "initialStateCheck": false
                 },
                 {
+<<<<<<< HEAD
                     "name": "Utility1",
+=======
+                    "name": "Configurations",
+>>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
                     "type": "Button",
                     "id": "cbfab206-4cfa-4540-ba36-9853bf67a0d6",
                     "expectedControlType": "Button",
@@ -42,7 +46,11 @@
                     "initialStateCheck": false
                 },
                 {
+<<<<<<< HEAD
                     "name": "Interact",
+=======
+                    "name": "Utility_1",
+>>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
                     "type": "Button",
                     "id": "ee6f0d3e-6b3e-47bf-bdc6-c20daa7d0de1",
                     "expectedControlType": "Button",
@@ -134,7 +142,11 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+<<<<<<< HEAD
                     "action": "Dodge",
+=======
+                    "action": "Configurations",
+>>>>>>> b2bf63e9ea4b7ee615659e2f02965ba0d8b2c647
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -145,7 +157,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Utility1",
+                    "action": "Utility_1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
