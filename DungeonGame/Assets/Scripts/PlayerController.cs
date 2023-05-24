@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using GlobalConstants;
-using System.Diagnostics.Contracts;
-using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Vector2 inputVector;
     private float timeAnimationDodge = 0.6f;
-    private float timeAnimationAttack = 0.533f;
+    private float timeAnimationAttack = 0.5f;
     private bool isWalking;
     public bool isTakeDamage = false;
     private bool isAttacking = false;
@@ -38,11 +36,17 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        StartCoroutine(GetAnimator());  
         inputVector = inputs.GetMovementVectorNormalized();
         inputs.OnInteractAction += Inputs_OnInteractAction;
         inputs.OnAttackAction += Inputs_OnAttackAction;
         inputs.OnDodgeAction += Inputs_OnDodgeAction;
+    }
+
+    IEnumerator GetAnimator() 
+    {
+        yield return new WaitForEndOfFrame();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void FixedUpdate()
@@ -53,16 +57,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        animator.SetBool(Constants.WALK, IsWalking());
-        animator.SetBool(Constants.DODGE, IsDodge()); 
-        if (IsAttacking())
+        if(animator != null) 
         {
-            animator.SetLayerWeight(1, 1f);
-        }
-        else
-        {
-            animator.SetLayerWeight(1, 0f);
-        }       
+            animator.SetBool(Constants.WALK, IsWalking());
+            animator.SetBool(Constants.DODGE, IsDodge()); 
+        }      
     }
     #endregion
 
@@ -75,9 +74,15 @@ public class PlayerController : MonoBehaviour
     {
         if (!isAttacking)
         {
-            isAttacking = true;
             Attack();
-            StartCoroutine(CalculatorCooldown(isAttacking, timeAnimationAttack));
+
+            isAttacking = true;
+            animator.SetLayerWeight(1, 1f);
+            animator.SetTrigger("TT");
+        }
+        else 
+        {
+            animator.SetLayerWeight(1, 0f);
         }
     }
 
@@ -124,16 +129,14 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        StartCoroutine(CalculatorCooldown(isAttacking, timeAnimationAttack));
+        isAttacking = false;
     }
 
     public void TakeDamage(Vector3 hitPoint, float damage) 
     {
         Instantiate(hitParticle, hitPoint, Quaternion.identity);
-        //health -= damage;
         animator.SetTrigger(Constants.GETHIT);
         isTakeDamage = false;
-        Instantiate(hitParticle, hitPoint, Quaternion.identity);
         CalculatorCooldown(isTakeDamage, 1f);
         
     }

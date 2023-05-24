@@ -12,7 +12,7 @@ public class PlayerAnimation : MonoBehaviour
     void Start()
     {
         //animator = GetComponent<Animator>();
-        playerController = GetComponentInParent<PlayerController>();
+        //playerController = GetComponentInParent<PlayerController>();
     }
 
     void Update()
