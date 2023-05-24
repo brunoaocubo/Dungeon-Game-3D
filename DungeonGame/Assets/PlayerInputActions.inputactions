@@ -33,18 +33,27 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Config",
+                    "name": "Utility1",
                     "type": "Button",
-                    "id": "7194adcd-25fd-493d-9014-1ff2e4e09caf",
+                    "id": "cbfab206-4cfa-4540-ba36-9853bf67a0d6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Utility1",
+                    "name": "Interact",
                     "type": "Button",
-                    "id": "cbfab206-4cfa-4540-ba36-9853bf67a0d6",
+                    "id": "ee6f0d3e-6b3e-47bf-bdc6-c20daa7d0de1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Settings",
+                    "type": "Button",
+                    "id": "7194adcd-25fd-493d-9014-1ff2e4e09caf",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -111,7 +120,7 @@
                     "name": "",
                     "id": "93bf67c4-146e-4983-9b49-ee760e3a1a07",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
@@ -122,21 +131,10 @@
                     "name": "",
                     "id": "ba8d4951-de53-43f6-82a5-215979a0fc18",
                     "path": "<Keyboard>/space",
-                    "interactions": "Press(behavior=2)",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dodge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b3e3033e-143e-4469-8b73-a723f687f013",
-                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Config",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -148,6 +146,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Utility1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f1ca1e9-9442-4337-9717-ae84a37377a4",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b3e3033e-143e-4469-8b73-a723f687f013",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Settings",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

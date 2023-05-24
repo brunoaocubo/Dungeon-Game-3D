@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GlobalConstants;
+using Unity.VisualScripting;
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -16,21 +17,22 @@ public class PlayerAnimation : MonoBehaviour
 
     void Update()
     {
+        /*
         animator.SetBool(Constants.WALK, playerController.IsWalking());
-        animator.SetBool(Constants.DODGE, !playerController.CanDodge);
+        animator.SetBool(Constants.DODGE, playerController.IsDodge());
 
         if(playerController.IsGetHit()) 
         { 
             animator.SetTrigger(Constants.GETHIT); 
         }
-
-        if(!playerController.CanAttack) 
+        
+        if(playerController.IsAttacking()) 
         { 
-            animator.SetLayerWeight(1, 1f); 
+            animator.SetLayerWeight(1, 1f);
         }
         else 
         { 
             animator.SetLayerWeight(1, 0f); 
-        }
+        }*/
     }
 }
