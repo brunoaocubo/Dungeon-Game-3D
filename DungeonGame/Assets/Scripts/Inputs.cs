@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+
+
 public class Inputs : MonoBehaviour
 {
     private PlayerInputActions inputActions;
@@ -17,6 +19,21 @@ public class Inputs : MonoBehaviour
         inputActions.Player.Interact.performed += Interact_performed;
         inputActions.Player.Attack.performed += Attack_performed;
         inputActions.Player.Dodge.performed += Dodge_performed;
+
+    }
+
+    private void Update()
+    {
+        //Debug.Log(Debugar());
+    }
+    private void OnEnable()
+    {
+        OnAttackAction?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void Debugar() 
+    {
+        
     }
 
     private void Dodge_performed(InputAction.CallbackContext obj)

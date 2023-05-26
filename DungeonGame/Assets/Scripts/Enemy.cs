@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject hitParticle;
 
     [Header("STATUS")]
-    [SerializeField] private float attackDamage;
+    [SerializeField] private float[] randomValueDamage = new float[2];
     [SerializeField] private float attackRange; 
 
     private Animator animator;
@@ -67,13 +67,13 @@ public class Enemy : MonoBehaviour
     IEnumerator AttackPlayer(float timeAnimationAttack) 
     {
         canAttack = false;
-        animator.SetBool(Constants.ATTACK, !canAttack);
 
         if(Physics.Raycast(lookAt.position, transform.forward, out hit, attackRange)) 
         {
             if (hit.collider.gameObject == player) 
             {
-                hit.collider.gameObject.GetComponent<PlayerController>().TakeDamage(hit.point, attackDamage);
+                animator.SetBool(Constants.ATTACK, !canAttack);
+                hit.collider.gameObject.GetComponent<PlayerController>().TakeDamage(hit.point, Random.Range(randomValueDamage[0], randomValueDamage[1]));
             }
         }
        

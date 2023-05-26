@@ -14,15 +14,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dodgeForce;
     [SerializeField] private float rotateSpeed;
     [SerializeField] private float swordDamage;
+    [SerializeField] private float health = 100;
+
 
     private Rigidbody playerRigdbody;
     private Animator animator;
     private Vector2 inputVector;
     private float timeAnimationDodge = 0.6f;
-    private float timeAnimationAttack = 0.5f;
+    private float timeCooldownAttack = 1f;
+    private float currentHealth;
     private bool isWalking;
     public bool isTakeDamage = false;
-    private bool isAttacking = false;
     private bool isDodge = false;
     #endregion
 
@@ -36,7 +38,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(GetAnimator());  
+        StartCoroutine(GetAnimator());
+        currentHealth = health;
         inputVector = inputs.GetMovementVectorNormalized();
         inputs.OnInteractAction += Inputs_OnInteractAction;
         inputs.OnAttackAction += Inputs_OnAttackAction;
@@ -124,15 +127,19 @@ public class PlayerController : MonoBehaviour
     {
         Instantiate(hitParticle, hitPoint, Quaternion.identity);
         animator.SetTrigger(Constants.GETHIT);
+        currentHealth -= damage;
         isTakeDamage = false;
         CalculatorCooldown(isTakeDamage, 1f);
-        
+
+        if(currentHealth <= 0) 
+        {
+            StartCoroutine(Die());
+        }       
     }
 
     IEnumerator CalculatorCooldown(bool x, float timeAnimation)
     {
-        yield return new WaitForSeconds(timeAnimation);
-        if (x == isAttacking) { isAttacking = false; }     
+        yield return new WaitForSeconds(timeAnimation); 
         if (x == isDodge) { isDodge = false; }
     }
 
@@ -141,15 +148,22 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger(Constants.ATTACK);
         AttackComplement();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timeCooldownAttack);
     }
 
+    /*
     IEnumerator Dodge()
     {
         animator.SetTrigger(Constants.DODGE);
         playerRigdbody.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
         yield return new WaitForSeconds(timeAnimationDodge);
+    }*/
 
+    IEnumerator Die() 
+    {
+        animator.SetTrigger(Constants.DIE);
+        yield return new WaitForEndOfFrame();
+        Destroy(gameObject);
     }
 
     public bool IsGetHit ()
@@ -165,10 +179,5 @@ public class PlayerController : MonoBehaviour
     public bool IsDodge() 
     { 
         return isDodge;  
-    }
-
-    public bool IsAttacking() 
-    {  
-        return isAttacking;  
     }
 }
