@@ -72,22 +72,11 @@ public class PlayerController : MonoBehaviour
 
     private void Inputs_OnAttackAction(object sender, System.EventArgs e)
     {
-        if (!isAttacking)
-        {
-            Attack();
-
-            isAttacking = true;
-            animator.SetLayerWeight(1, 1f);
-            animator.SetTrigger("TT");
-        }
-        else 
-        {
-            animator.SetLayerWeight(1, 0f);
-        }
+        StartCoroutine(Attack());
     }
 
     private void Inputs_OnDodgeAction(object sender, System.EventArgs e)
-    {
+    {     
         if (!isDodge)
         {
             isDodge = true;
@@ -112,7 +101,7 @@ public class PlayerController : MonoBehaviour
         playerRigdbody.MoveRotation(playerRigdbody.rotation * Quaternion.Euler(rotate * Time.fixedDeltaTime));
     }
 
-    private void Attack() 
+    private void AttackComplement() 
     {
         Collider[] getEnemies = Physics.OverlapSphere(transform.position, 1);
         foreach (Collider collider in getEnemies) 
@@ -129,7 +118,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        isAttacking = false;
     }
 
     public void TakeDamage(Vector3 hitPoint, float damage) 
@@ -146,6 +134,22 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(timeAnimation);
         if (x == isAttacking) { isAttacking = false; }     
         if (x == isDodge) { isDodge = false; }
+    }
+
+    IEnumerator Attack()
+    {
+        animator.SetTrigger(Constants.ATTACK);
+        AttackComplement();
+
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator Dodge()
+    {
+        animator.SetTrigger(Constants.DODGE);
+        playerRigdbody.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
+        yield return new WaitForSeconds(timeAnimationDodge);
+
     }
 
     public bool IsGetHit ()
