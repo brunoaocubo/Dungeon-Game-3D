@@ -6,33 +6,30 @@ using GlobalConstants;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    private PlayerController playerController;
-    private Animator animator;
+    [SerializeField] private Animator animator;
 
-    void Start()
+    public void SetWalkAnimation(bool isWalking)
     {
-        //animator = GetComponent<Animator>();
-        //playerController = GetComponentInParent<PlayerController>();
+        animator.SetBool(Constants.WALK, isWalking);
     }
 
-    void Update()
+    public void SetDodgeAnimation(bool isDodge)
     {
-        
-        //animator.SetBool(Constants.WALK, playerController.IsWalking());
-        //animator.SetBool(Constants.DODGE, playerController.IsDodge());
-        /*
-        if(playerController.IsGetHit()) 
-        { 
-            animator.SetTrigger(Constants.GETHIT); 
-        }
-        
-        if(playerController.IsAttacking()) 
-        { 
-            animator.SetLayerWeight(1, 1f);
-        }
-        else 
-        { 
-            animator.SetLayerWeight(1, 0f); 
-        }*/
+        animator.SetBool(Constants.DODGE, isDodge);
+    }
+
+    public void PlayAttackAnimation()
+    {
+        animator.SetTrigger(Constants.ATTACK);
+    }
+
+    public void PlayGetHitAnimation()
+    {
+        animator.SetTrigger(Constants.GETHIT);
+    }
+
+    public void PlayDieAnimation()
+    {
+        animator.SetTrigger(Constants.DIE);
     }
 }

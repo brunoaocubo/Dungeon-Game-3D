@@ -3,8 +3,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-
-
 public class Inputs : MonoBehaviour
 {
     private PlayerInputActions inputActions;
@@ -24,16 +22,11 @@ public class Inputs : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(Debugar());
+
     }
     private void OnEnable()
     {
         OnAttackAction?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void Debugar() 
-    {
-        
     }
 
     private void Dodge_performed(InputAction.CallbackContext obj)

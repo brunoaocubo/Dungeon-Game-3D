@@ -4,8 +4,7 @@ namespace GlobalConstants
 {
     public static class Constants
     {
-        [Header("NAME CLIP ANIMATIONS")]
-        public const string ATTACK_CLIP = "Attack01";
+        [Header("SITUATIONAL")]
 
         [Header("PARAMETERS ANIMATIONS")]
         public const string ATTACK = "Attack";

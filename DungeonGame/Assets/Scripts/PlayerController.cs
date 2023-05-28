@@ -2,6 +2,13 @@ using System.Collections;
 using UnityEngine;
 using GlobalConstants;
 
+public enum PlayerState 
+{
+    Walking,
+    Attacking,
+    Dodging
+}
+
 public class PlayerController : MonoBehaviour
 {
     #region VARIAVEIS...
@@ -14,17 +21,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dodgeForce;
     [SerializeField] private float rotateSpeed;
     [SerializeField] private float swordDamage;
-    [SerializeField] private float health = 100;
 
-
+    private PlayerAnimation playerAnimation;
+    private Health playerHealth;
     private Rigidbody playerRigdbody;
-    private Animator animator;
     private Vector2 inputVector;
     private float timeAnimationDodge = 0.6f;
     private float timeCooldownAttack = 1f;
-    private float currentHealth;
     private bool isWalking;
-    public bool isTakeDamage = false;
     private bool isDodge = false;
     #endregion
 
@@ -34,22 +38,18 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         playerRigdbody = GetComponent<Rigidbody>();
+        playerAnimation = GetComponent<PlayerAnimation>();
+        playerHealth = GetComponent<Health>();
     }
 
     void Start()
     {
-        StartCoroutine(GetAnimator());
-        currentHealth = health;
         inputVector = inputs.GetMovementVectorNormalized();
         inputs.OnInteractAction += Inputs_OnInteractAction;
         inputs.OnAttackAction += Inputs_OnAttackAction;
         inputs.OnDodgeAction += Inputs_OnDodgeAction;
-    }
 
-    IEnumerator GetAnimator() 
-    {
-        yield return new WaitForEndOfFrame();
-        animator = GetComponentInChildren<Animator>();
+        StartCoroutine(InstancePlayerAnimation());
     }
 
     private void FixedUpdate()
@@ -60,14 +60,20 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(animator != null) 
+        if(playerAnimation != null) 
         {
-            animator.SetBool(Constants.WALK, IsWalking());
-            animator.SetBool(Constants.DODGE, IsDodge()); 
-        }      
+            playerAnimation.SetWalkAnimation(isWalking);
+            playerAnimation.SetDodgeAnimation(isDodge);
+        }
+
+        if (playerHealth.DamageTaken) 
+        {
+            playerAnimation.PlayGetHitAnimation();
+        }
     }
     #endregion
 
+    #region EVENTS
     private void Inputs_OnInteractAction(object sender, System.EventArgs e)
     {
 
@@ -87,7 +93,9 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(CalculatorCooldown(isDodge, timeAnimationDodge));
         }
     }
+    #endregion
 
+    #region METHODS
     private void PlayerMovement() 
     {
         inputVector = inputs.GetMovementVectorNormalized();
@@ -113,64 +121,51 @@ public class PlayerController : MonoBehaviour
             {
                 if (collider.gameObject.layer == Constants.OBJECT_DESTRUCTABLE)
                 {
+
                     Destroy(collider.gameObject);
                 }
                 else if (collider.gameObject.layer == Constants.ENEMY)
                 {
-                    collider.GetComponent<Enemy>().TakeDamage(collider.transform.position, swordDamage);
+                    collider.GetComponent<Enemy>().TakeDamage(collider.transform.TransformPoint(Vector3.up), swordDamage);
                 }
             }
         }
     }
+    #endregion
 
-    public void TakeDamage(Vector3 hitPoint, float damage) 
-    {
-        Instantiate(hitParticle, hitPoint, Quaternion.identity);
-        animator.SetTrigger(Constants.GETHIT);
-        currentHealth -= damage;
-        isTakeDamage = false;
-        CalculatorCooldown(isTakeDamage, 1f);
-
-        if(currentHealth <= 0) 
-        {
-            StartCoroutine(Die());
-        }       
-    }
+    #region COROUTINES
 
     IEnumerator CalculatorCooldown(bool x, float timeAnimation)
     {
+        
         yield return new WaitForSeconds(timeAnimation); 
         if (x == isDodge) { isDodge = false; }
     }
 
     IEnumerator Attack()
-    {
-        animator.SetTrigger(Constants.ATTACK);
+    {       
+        playerAnimation.PlayAttackAnimation();
         AttackComplement();
 
         yield return new WaitForSeconds(timeCooldownAttack);
     }
 
-    /*
-    IEnumerator Dodge()
-    {
-        animator.SetTrigger(Constants.DODGE);
-        playerRigdbody.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
-        yield return new WaitForSeconds(timeAnimationDodge);
-    }*/
-
     IEnumerator Die() 
     {
-        animator.SetTrigger(Constants.DIE);
-        yield return new WaitForEndOfFrame();
+        playerAnimation.PlayDieAnimation();
+        //animator.SetTrigger(Constants.DIE);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 
-    public bool IsGetHit ()
+    IEnumerator InstancePlayerAnimation()
     {
-        return isTakeDamage;
+        yield return new WaitForEndOfFrame();
+        playerAnimation = GetComponentInChildren<PlayerAnimation>();
     }
+    #endregion
 
+    #region FUNCTIONS
     public bool IsWalking()
     {
         return isWalking;
@@ -180,4 +175,5 @@ public class PlayerController : MonoBehaviour
     { 
         return isDodge;  
     }
+    #endregion
 }
