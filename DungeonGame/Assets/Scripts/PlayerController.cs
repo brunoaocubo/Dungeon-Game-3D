@@ -24,6 +24,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Sound_Fx")]
     [SerializeField] private GameObject walkSound;
+    [SerializeField] private GameObject evasionSound;
+    [SerializeField] private AudioSource slashSound;
+    [SerializeField] private AudioSource slashAirSound;
+
+
 
     private PlayerAnimation _playerAnimation;
     private Health _playerHealth;
@@ -47,7 +52,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        
+        walkSound.SetActive(false);
+        evasionSound.SetActive(false);
+
         _inputVector = inputs.GetMovementVectorNormalized();
         inputs.OnInteractAction += Inputs_OnInteractAction;
         inputs.OnAttackAction += Inputs_OnAttackAction;
@@ -73,6 +80,15 @@ public class PlayerController : MonoBehaviour
         if (_playerHealth.DamageTaken) 
         {
             _playerAnimation.PlayGetHitAnimation();
+        }
+
+        if(_isDodge)
+        {
+            evasionSound.SetActive(true);
+        }
+        else 
+        {
+            evasionSound.SetActive(false);   
         }
     }
     #endregion
@@ -130,16 +146,21 @@ public class PlayerController : MonoBehaviour
         Collider[] getEnemies = Physics.OverlapSphere(transform.position, 1);
         foreach (Collider collider in getEnemies) 
         {
-            if(collider != null) 
+            if(collider != null)
             {
                 if (collider.gameObject.layer == Constants.OBJECT_DESTRUCTABLE)
                 {
-
+                    slashSound.Play();
                     Destroy(collider.gameObject);
                 }
                 else if (collider.gameObject.layer == Constants.ENEMY)
                 {
+                    slashSound.Play();
                     collider.GetComponent<Enemy>().TakeDamage(collider.transform.TransformPoint(Vector3.up), swordDamage);
+                }
+                else 
+                {
+                    slashAirSound.Play();
                 }
             }
         }

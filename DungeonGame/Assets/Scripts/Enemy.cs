@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Sound FX")]
     [SerializeField] private GameObject walkSound;
+    [SerializeField] private AudioSource slashSound;
 
     private Rigidbody enemyRigdbody;
     private NavMeshAgent agent;
@@ -64,6 +65,7 @@ public class Enemy : MonoBehaviour
         if(currentLife <= 0) 
         {
             animator.SetTrigger(Constants.DIE);
+            agent.velocity = Vector3.zero;
             Destroy(gameObject, timeAnimationDie);
         }
 
@@ -120,6 +122,7 @@ public class Enemy : MonoBehaviour
                 if (hit.collider.gameObject == player)
                 {
                     animator.SetTrigger(Constants.ATTACK);
+                    slashSound.Play();
                     hit.collider.gameObject.GetComponentInChildren<Health>().TakeDamage(hit.point, Random.Range(randomValueDamage[0], randomValueDamage[1]));
                 }
             }
