@@ -22,14 +22,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rotateSpeed;
     [SerializeField] private float swordDamage;
 
-    private PlayerAnimation playerAnimation;
-    private Health playerHealth;
-    private Rigidbody playerRigdbody;
-    private Vector2 inputVector;
-    private float timeAnimationDodge = 0.6f;
-    private float timeCooldownAttack = 1f;
-    private bool isWalking;
-    private bool isDodge = false;
+    [Header("Sound_Fx")]
+    [SerializeField] private GameObject walkSound;
+
+    private PlayerAnimation _playerAnimation;
+    private Health _playerHealth;
+    private Rigidbody _playerRigdbody;
+    private Vector2 _inputVector;
+    private float _timeAnimationDodge = 0.6f;
+    private float _timeCooldownAttack = 1f;
+    private bool _isWalking;
+    private bool _isDodge = false;
     #endregion
 
     #region STARTS, UPDATES...
@@ -37,14 +40,15 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        playerRigdbody = GetComponent<Rigidbody>();
-        playerAnimation = GetComponent<PlayerAnimation>();
-        playerHealth = GetComponent<Health>();
+        _playerRigdbody = GetComponent<Rigidbody>();
+        _playerAnimation = GetComponent<PlayerAnimation>();
+        _playerHealth = GetComponentInChildren<Health>();
     }
 
     void Start()
     {
-        inputVector = inputs.GetMovementVectorNormalized();
+        
+        _inputVector = inputs.GetMovementVectorNormalized();
         inputs.OnInteractAction += Inputs_OnInteractAction;
         inputs.OnAttackAction += Inputs_OnAttackAction;
         inputs.OnDodgeAction += Inputs_OnDodgeAction;
@@ -60,15 +64,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(playerAnimation != null) 
+        if(_playerAnimation != null) 
         {
-            playerAnimation.SetWalkAnimation(isWalking);
-            playerAnimation.SetDodgeAnimation(isDodge);
+            _playerAnimation.SetWalkAnimation(_isWalking);
+            _playerAnimation.SetDodgeAnimation(_isDodge);
         }
 
-        if (playerHealth.DamageTaken) 
+        if (_playerHealth.DamageTaken) 
         {
-            playerAnimation.PlayGetHitAnimation();
+            _playerAnimation.PlayGetHitAnimation();
         }
     }
     #endregion
@@ -86,11 +90,11 @@ public class PlayerController : MonoBehaviour
 
     private void Inputs_OnDodgeAction(object sender, System.EventArgs e)
     {     
-        if (!isDodge)
+        if (!_isDodge)
         {
-            isDodge = true;
-            playerRigdbody.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
-            StartCoroutine(CalculatorCooldown(isDodge, timeAnimationDodge));
+            _isDodge = true;
+            _playerRigdbody.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
+            StartCoroutine(CalculatorCooldown(_isDodge, _timeAnimationDodge));
         }
     }
     #endregion
@@ -98,18 +102,27 @@ public class PlayerController : MonoBehaviour
     #region METHODS
     private void PlayerMovement() 
     {
-        inputVector = inputs.GetMovementVectorNormalized();
-        Vector3 moveDir = new Vector3(inputVector.x, 0, inputVector.y);
-        moveDir = playerRigdbody.rotation * moveDir;
-        playerRigdbody.MovePosition(playerRigdbody.position + moveDir * moveSpeed * Time.fixedDeltaTime);
+        _inputVector = inputs.GetMovementVectorNormalized();
+        Vector3 moveDir = new Vector3(_inputVector.x, 0, _inputVector.y);
+        moveDir = _playerRigdbody.rotation * moveDir;
+        _playerRigdbody.MovePosition(_playerRigdbody.position + moveDir * moveSpeed * Time.fixedDeltaTime);      
+        _isWalking = (moveDir != Vector3.zero);
 
-        isWalking = (moveDir != Vector3.zero);
+        if (_isWalking && _isDodge == false) 
+        {
+            walkSound.SetActive(true);
+            
+        }
+        else 
+        {
+            walkSound.SetActive(false);
+        }
     }
 
     private void PlayerRotation() 
     {
-        Vector3 rotate = new Vector3(0, inputVector.x, 0) * rotateSpeed * 100f;
-        playerRigdbody.MoveRotation(playerRigdbody.rotation * Quaternion.Euler(rotate * Time.fixedDeltaTime));
+        Vector3 rotate = new Vector3(0, _inputVector.x, 0) * rotateSpeed * 100f;
+        _playerRigdbody.MoveRotation(_playerRigdbody.rotation * Quaternion.Euler(rotate * Time.fixedDeltaTime));
     }
 
     private void AttackComplement() 
@@ -139,20 +152,20 @@ public class PlayerController : MonoBehaviour
     {
         
         yield return new WaitForSeconds(timeAnimation); 
-        if (x == isDodge) { isDodge = false; }
+        if (x == _isDodge) { _isDodge = false; }
     }
 
     IEnumerator Attack()
     {       
-        playerAnimation.PlayAttackAnimation();
+        _playerAnimation.PlayAttackAnimation();
         AttackComplement();
 
-        yield return new WaitForSeconds(timeCooldownAttack);
+        yield return new WaitForSeconds(_timeCooldownAttack);
     }
 
     IEnumerator Die() 
     {
-        playerAnimation.PlayDieAnimation();
+        _playerAnimation.PlayDieAnimation();
         //animator.SetTrigger(Constants.DIE);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
@@ -161,19 +174,19 @@ public class PlayerController : MonoBehaviour
     IEnumerator InstancePlayerAnimation()
     {
         yield return new WaitForEndOfFrame();
-        playerAnimation = GetComponentInChildren<PlayerAnimation>();
+        _playerAnimation = GetComponentInChildren<PlayerAnimation>();
     }
     #endregion
 
     #region FUNCTIONS
     public bool IsWalking()
     {
-        return isWalking;
+        return _isWalking;
     }
 
     public bool IsDodge() 
     { 
-        return isDodge;  
+        return _isDodge;  
     }
     #endregion
 }

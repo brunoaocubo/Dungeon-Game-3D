@@ -16,7 +16,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float detectionRange;
     [SerializeField] private float forceKnockback;
 
+    [Header("Sound FX")]
+    [SerializeField] private GameObject walkSound;
 
+    private Rigidbody enemyRigdbody;
     private NavMeshAgent agent;
     private Animator animator;
     private RaycastHit hit;
@@ -35,6 +38,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        enemyRigdbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -63,13 +67,25 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject, timeAnimationDie);
         }
 
-        if (chaseMode) 
+        if (chaseMode)
         {
             agent.destination = player.transform.position;
+
+        }
+        else
+        {
+            //back to patrol
+        }
+
+        if (agent.velocity != Vector3.zero) 
+        {
+            animator.SetBool(Constants.WALK, true);
+            walkSound.SetActive(true);
         }
         else 
         {
-            //back to patrol
+            animator.SetBool(Constants.WALK, false);
+            walkSound.SetActive(false);
         }
     }
 
@@ -81,6 +97,7 @@ public class Enemy : MonoBehaviour
 
         Instantiate(hitParticle, hitPoint, Quaternion.identity);
 
+        StartCoroutine(Knockback());
         Invoke(NEGATE_DMG_TAKEN, timeRecoveryHit);
     }
 
@@ -103,7 +120,7 @@ public class Enemy : MonoBehaviour
                 if (hit.collider.gameObject == player)
                 {
                     animator.SetTrigger(Constants.ATTACK);
-                    hit.collider.gameObject.GetComponent<Health>().TakeDamage(hit.point, Random.Range(randomValueDamage[0], randomValueDamage[1]));
+                    hit.collider.gameObject.GetComponentInChildren<Health>().TakeDamage(hit.point, Random.Range(randomValueDamage[0], randomValueDamage[1]));
                 }
             }
 
