@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float forceKnockback;
 
     [Header("Sound FX")]
-    [SerializeField] private GameObject walkSound;
+    [SerializeField] private AudioSource slimeSteeps;
     [SerializeField] private AudioSource slashSound;
 
     private NavMeshAgent agent;
@@ -57,12 +57,14 @@ public class Enemy : MonoBehaviour
         if (agent.velocity != Vector3.zero) 
         {
             animator.SetBool(Constants.WALK, true);
-            walkSound.SetActive(true);
+            if (!slimeSteeps.isPlaying) 
+            {
+                slimeSteeps.Play();
+            }
         }
         else 
         {
             animator.SetBool(Constants.WALK, false);
-            walkSound.SetActive(false);
         }
     }
 
@@ -83,7 +85,7 @@ public class Enemy : MonoBehaviour
 
     private void ChaseTarget() 
     {
-        if (chaseMode)
+        if (chaseMode && currentLife > 0)
         {
             agent.destination = target.transform.position;
 
@@ -103,16 +105,17 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(Vector3 hitPoint, float damage) 
     {
-        damageTaken = true;
-        currentLife -= damage;
-        animator.SetTrigger(Constants.GETHIT);
-
+        if(currentLife > 0) 
+        {
+            damageTaken = true;
+            currentLife -= damage;
+            animator.SetTrigger(Constants.GETHIT);
+        }
         if (currentLife <= 0) 
         {
             Die();
         }
         
-        //StartCoroutine(Knockback());
         Instantiate(hitParticle, hitPoint, Quaternion.identity);
         Invoke(NEGATE_DMG_TAKEN, timeRecoveryHit);
     }
@@ -128,7 +131,6 @@ public class Enemy : MonoBehaviour
     private void Die() 
     {
         animator.SetTrigger(Constants.DIE);
-        agent.velocity = Vector3.zero;
         Destroy(gameObject, timeAnimationDie);    
     }
 
@@ -152,20 +154,4 @@ public class Enemy : MonoBehaviour
             canAttack = true;
         }
     }
-
-    /*
-    IEnumerator Knockback() 
-    {
-        Vector3 direction = target.transform.forward;
-
-        agent.speed = agent.speed * 2;       
-        agent.acceleration = agent.acceleration * 2;
-        agent.velocity = direction * forceKnockback;
-
-        yield return new WaitForSeconds(timeRecoveryHit);
-
-        agent.speed = agent.speed /2;
-        agent.acceleration = agent.acceleration * 2;
-        agent.velocity = direction * forceKnockback;
-    }*/
 }

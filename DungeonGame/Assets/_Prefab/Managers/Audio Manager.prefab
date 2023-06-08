@@ -44,3 +44,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b7451c191c578546961f299cd237f6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicMixerGroup: {fileID: 5372452636322284491, guid: 55137494f99e1a646939ced154a47eff, type: 2}
+  audioFxMixerGroup: {fileID: -8639028038586921978, guid: 55137494f99e1a646939ced154a47eff, type: 2}
+  sounds:
+  - audioSource: {fileID: 0}
+    audioType: 0
+    clip: {fileID: 8300000, guid: 22c59da50737def44a3fc49690c6fbb5, type: 3}
+    clipName: Menu Music
+    isLoop: 1
+    playOnAwake: 0
+    volume: 1
+  - audioSource: {fileID: 0}
+    audioType: 0
+    clip: {fileID: 8300000, guid: 6490bfc5b7faa8841b0fca3b8504975e, type: 3}
+    clipName: Gameplay Music
+    isLoop: 1
+    playOnAwake: 1
+    volume: 1
+  - audioSource: {fileID: 0}
+    audioType: 0
+    clip: {fileID: 8300000, guid: 24a7f5d15a4c14a47825603638a91db4, type: 3}
+    clipName: Gameplay Ambience
+    isLoop: 1
+    playOnAwake: 1
+    volume: 1

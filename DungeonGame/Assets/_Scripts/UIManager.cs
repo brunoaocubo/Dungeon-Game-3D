@@ -5,26 +5,35 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using UnityEngine.Audio;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Health health;
     [SerializeField] private Slider health_Slider;
     [SerializeField] private GameObject menuGame_Panel;
+    [SerializeField] private GameObject menuOptions_Panel;
     [SerializeField] private GameObject loadingScrenn_Panel;
     [SerializeField] private Slider loading_Slider;
     [SerializeField] private TextMeshProUGUI loading_Text;
     [SerializeField] private GameObject loadingConfirmed_Text;
-
-
+    [SerializeField] private Slider musicVolume_Slider;
+    [SerializeField] private Slider audioFxVolume_Slider;
+    
+    private float defaultMusicVolume = 1.0f;
+    private float defaultAudioFxVolume = 1.0f;
 
     [SerializeField] private InputController inputs;
     void Start()
     {
         menuGame_Panel.SetActive(false);
+        menuOptions_Panel.SetActive(false);
         loadingScrenn_Panel.SetActive(false);
         loadingConfirmed_Text.SetActive(false);
+
         health_Slider.maxValue = health.StartHealth;
+        musicVolume_Slider.value = defaultMusicVolume;
+        audioFxVolume_Slider.value = defaultAudioFxVolume;
     }
 
     private void OnEnable()
@@ -38,10 +47,10 @@ public class UIManager : MonoBehaviour
 
     private void Inputs_OnSettingsAction(object sender, System.EventArgs e)
     {
-        MenuState();
+        ToggleMenuInGame();
     }
 
-    private void MenuState() 
+    private void ToggleMenuInGame() 
     {
         if (menuGame_Panel.activeInHierarchy) 
         {
@@ -59,11 +68,13 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         health_Slider.value = health.CurrentHealth;
+        AudioManager.Instance.SetVolumeMusic(musicVolume_Slider.value);
+        AudioManager.Instance.SetVolumeAudioFX(audioFxVolume_Slider.value);
     }
 
     public void ResumeGame() 
     {
-        MenuState();
+        ToggleMenuInGame();
     }
 
     public void BeginGame()
@@ -71,9 +82,27 @@ public class UIManager : MonoBehaviour
         StartCoroutine(LoadAsyncScene(0));
     }
 
-    public void SaveGame() 
+    public void SaveGame()
     {
 
+    }
+
+    public void OpenOptions() 
+    {
+        if (!menuOptions_Panel.activeInHierarchy)
+        {
+            menuGame_Panel.SetActive(false);
+            menuOptions_Panel.SetActive(true);
+        }
+    }
+
+    public void BackOptions()
+    {
+        if (!menuGame_Panel.activeInHierarchy)
+        {
+            menuGame_Panel.SetActive(true);
+            menuOptions_Panel.SetActive(false);
+        }
     }
 
     public void QuitGame() 

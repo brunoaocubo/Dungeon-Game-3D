@@ -23,11 +23,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float swordDamage;
 
     [Header("Sound_Fx")]
-    [SerializeField] private AudioSource walkSound;
+    [SerializeField] private AudioSource steepsSound;
     [SerializeField] private AudioSource evasionSound;
     [SerializeField] private AudioSource slashSound;
     [SerializeField] private AudioSource slashAirSound;
-    public AudioClip WLK;
 
     private PlayerAnimation _playerAnimation;
     private Health _playerHealth;
@@ -115,6 +114,14 @@ public class PlayerController : MonoBehaviour
         moveDir = _playerRigdbody.rotation * moveDir;
         _playerRigdbody.MovePosition(_playerRigdbody.position + moveDir * moveSpeed * Time.fixedDeltaTime);      
         _isWalking = (moveDir != Vector3.zero);
+
+        if(_isWalking && !_isDodge) 
+        {
+            if (!steepsSound.isPlaying) 
+            {
+                steepsSound.Play();
+            }
+        }
     }
 
     private void PlayerRotation() 
@@ -171,6 +178,7 @@ public class PlayerController : MonoBehaviour
         _isDodge = true;
         _playerRigdbody.AddForce(transform.forward * dodgeForce, ForceMode.Impulse);
         evasionSound.Play();
+
         yield return new WaitForSeconds(_timeAnimationDodge);
         _isDodge = false;
     }
@@ -178,7 +186,6 @@ public class PlayerController : MonoBehaviour
     IEnumerator Die() 
     {
         _playerAnimation.PlayDieAnimation();
-        //animator.SetTrigger(Constants.DIE);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
