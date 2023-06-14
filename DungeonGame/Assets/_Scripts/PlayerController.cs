@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using GlobalConstants;
+using System.Diagnostics.Tracing;
 
 public enum PlayerState 
 {
@@ -140,6 +141,7 @@ public class PlayerController : MonoBehaviour
                 if (collider.gameObject.layer == Constants.OBJECT_DESTRUCTABLE)
                 {
                     slashSound.Play();
+                    collider.GetComponent<ForDestructableObj>().InstantiateParticle();
                     Destroy(collider.gameObject);
                 }
                 else if (collider.gameObject.layer == Constants.ENEMY)

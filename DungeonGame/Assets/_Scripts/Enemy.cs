@@ -130,6 +130,7 @@ public class Enemy : MonoBehaviour
 
     private void Die() 
     {
+        GameManager.instance.EnemyCount(1);
         animator.SetTrigger(Constants.DIE);
         Destroy(gameObject, timeAnimationDie);    
     }

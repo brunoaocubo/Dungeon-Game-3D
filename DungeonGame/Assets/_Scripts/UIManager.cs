@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject menuGame_Panel;
     [SerializeField] private GameObject menuOptions_Panel;
     [SerializeField] private GameObject loadingScrenn_Panel;
+    [SerializeField] private GameObject finalScrenn_Panel;
     [SerializeField] private Slider loading_Slider;
     [SerializeField] private TextMeshProUGUI loading_Text;
     [SerializeField] private GameObject loadingConfirmed_Text;
@@ -30,6 +31,7 @@ public class UIManager : MonoBehaviour
         menuOptions_Panel.SetActive(false);
         loadingScrenn_Panel.SetActive(false);
         loadingConfirmed_Text.SetActive(false);
+        finalScrenn_Panel.SetActive(false);
 
         health_Slider.maxValue = health.StartHealth;
         musicVolume_Slider.value = defaultMusicVolume;
@@ -70,6 +72,15 @@ public class UIManager : MonoBehaviour
         health_Slider.value = health.CurrentHealth;
         AudioManager.Instance.SetVolumeMusic(musicVolume_Slider.value);
         AudioManager.Instance.SetVolumeAudioFX(audioFxVolume_Slider.value);
+
+        if(GameManager.instance.EnemyRemain <= 0) 
+        {
+            finalScrenn_Panel.SetActive(true);
+        }
+        else 
+        {
+            finalScrenn_Panel.SetActive(false);
+        }
     }
 
     public void ResumeGame() 
@@ -80,11 +91,6 @@ public class UIManager : MonoBehaviour
     public void BeginGame()
     {
         StartCoroutine(LoadAsyncScene(0));
-    }
-
-    public void SaveGame()
-    {
-
     }
 
     public void OpenOptions() 

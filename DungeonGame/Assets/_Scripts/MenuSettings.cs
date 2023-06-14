@@ -9,6 +9,7 @@ public class MenuSettings : MonoBehaviour
     {
         PlayerPrefs.SetInt("indexSelectedCharacter", 0);
     }
+
     public void StartGame() 
     {
         int value = 0;
@@ -21,5 +22,13 @@ public class MenuSettings : MonoBehaviour
         {
             SceneManager.LoadScene(1, LoadSceneMode.Single);
         }
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
     }
 }

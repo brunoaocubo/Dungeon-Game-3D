@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     [SerializeField] private InputController inputs;
-    [SerializeField] private GameObject enemyToSpawn;
-    [SerializeField] private Collider localSpawn;
+    private int enemyRemain = 7;
+    public int EnemyRemain { get { return enemyRemain; }  }
 
     private void Awake()
     {
@@ -15,9 +17,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        float x = Random.Range(-localSpawn.bounds.size.x, localSpawn.bounds.size.x);
-        float z = Random.Range(-localSpawn.bounds.size.z, localSpawn.bounds.size.z);
-        Instantiate(enemyToSpawn, new Vector3(x, 0f, z), Quaternion.identity);
+        if (instance == null) 
+        {
+            instance = this;
+        }
     }
 
     private void OnEnable()
@@ -33,5 +36,14 @@ public class GameManager : MonoBehaviour
     private void Inputs_OnSettingsAction(object sender, System.EventArgs e)
     {
         Time.timeScale = 0;
+    }
+
+    public void EnemyCount(int count)
+    {
+        enemyRemain += count;
+        if (enemyRemain <= 0)
+        {
+            Debug.Log("Acabou");
+        }
     }
 }
